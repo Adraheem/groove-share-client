@@ -34,9 +34,9 @@ const songs: ISong[] = [
     title: "Chance (Na Ham)",
     artiste: "Seyi Vibez",
     image: "https://assets.audiomack.com/seyivibezmusic/03dc79aa7784166286e3a31211f0eb4deaff8f601280005d1ac681dc45d0752e.png?width=1500&height=1500&max=true",
-    albumName: "Calm Down",
+    albumName: "Chance (Na Ham)",
     duration: 768,
-    playback: songFiles.folake,
+    playback: songFiles.chance,
   },
   // {
   //   id: 5,

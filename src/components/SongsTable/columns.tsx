@@ -1,7 +1,7 @@
 import {ISong} from "../../types/song.types";
 import {ColumnsType} from "antd/es/table";
-import {Icon} from "@iconify/react";
 import utils from "../../utils";
+import CurrentlyPlaying from "./CurrentlyPlaying";
 
 const columns: ColumnsType<ISong> = [
   {
@@ -10,15 +10,7 @@ const columns: ColumnsType<ISong> = [
     key: "id",
     className: "w-8 text-center",
     render: (_, record) => (
-      <>
-        <div className="w-8 text-center group-hover:display-none">{record.id}</div>
-        <div className="w-8 text-center display-none group-hover:display-block text-primary">
-          <Icon
-            icon="material-symbols:play-arrow-rounded"
-            width={24}
-            height={24}/>
-        </div>
-      </>
+      <CurrentlyPlaying id={record.id}/>
     )
   },
   {

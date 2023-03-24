@@ -9,6 +9,10 @@ class PlayerService {
     store.dispatch(playerActions.playPlaylist({songs, id, playlist}));
   }
 
+  public playNext() {
+    store.dispatch(playerActions.playNextPrev());
+  }
+
 }
 
 const playerService = new PlayerService();

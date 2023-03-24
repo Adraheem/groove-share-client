@@ -5,6 +5,7 @@ import utils from "../../utils";
 import ReactHowler from 'react-howler';
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {playerActions} from "../../redux/reducers/playerSlice";
+import playerService from "../../services/player.service";
 
 interface IProps {
 }
@@ -58,6 +59,10 @@ function Controls(props: IProps) {
     dispatch(playerActions.toggleShuffle());
   }
 
+  const handlePlayNext = () => {
+    playerService.playNext();
+  }
+
   return (
     <>
       <div className="">
@@ -87,12 +92,12 @@ function Controls(props: IProps) {
                 }}/>
             </Button>
           </div>
-          <Button type="link">
+          <Button type="link" onClick={handlePlayNext}>
             <Icon icon="ic:baseline-skip-next" width={24} height={24}/>
           </Button>
-          <Button type="link" onClick={handleRepeat} className={repeat ? "button-active" : ""}>
+          <Button type="link" onClick={handleRepeat} className={repeat !== "OFF" ? "button-active" : ""}>
             <Icon
-              icon="fluent:arrow-repeat-all-20-filled"
+              icon={repeat === "ONE" ? "ph:repeat-once-bold" : "fluent:arrow-repeat-all-20-filled"}
               width={24}
               height={24}
             />
@@ -120,7 +125,6 @@ function Controls(props: IProps) {
               src={currentSong?.playback}
               playing={playing}
               onLoad={handleOnLoad}
-              loop={repeat}
               preload={true}
           // onPlay={handlePlayPause}
           // onPause={handlePlayPause}
