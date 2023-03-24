@@ -1,5 +1,5 @@
 @import "reset";
-
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -109,6 +109,30 @@
     line-height: 18px;
   }
 
+  h1 {
+    @apply typo-h1;
+  }
+
+  h2 {
+    @apply typo-h2;
+  }
+
+  h3 {
+    @apply typo-h3;
+  }
+
+  h4 {
+    @apply typo-h4;
+  }
+
+  h5 {
+    @apply typo-h5;
+  }
+
+  h6 {
+    @apply typo-h6;
+  }
+
   .image-cover {
     @apply w-full h-full object-cover object-center;
   }
@@ -125,6 +149,7 @@
     display: block;
   }
 
+
   .button-active {
     @apply text-primary relative;
 
@@ -133,5 +158,9 @@
       @apply absolute -bottom-1 left-[50%] w-1 h-1 bg-primary rounded-2xl;
       transform: translateX(-50%);
     }
+  }
+
+  button[type="button"].ant-btn-primary{
+    background-color: #DC1E11;
   }
 }

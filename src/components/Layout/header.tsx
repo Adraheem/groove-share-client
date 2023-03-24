@@ -14,8 +14,8 @@ function Header(props: IProps) {
           <img src={images.Logo} alt="Logo" className="h-4"/>
         </Link>
         <ul className="flex gap-2 items-center">
-          <li><Button>Login</Button></li>
-          <li><Button type="primary">Get Started</Button></li>
+          <li><Link to="/login"><Button>Login</Button></Link></li>
+          <li><Link to="/signup"><Button type="primary">Get Started</Button></Link></li>
         </ul>
       </header>
     </div>
