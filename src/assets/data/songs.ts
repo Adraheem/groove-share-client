@@ -37,24 +37,6 @@ const songs: ISong[] = [
     duration: 768,
     playback: "https://p.scdn.co/mp3-preview/74f0b5f06f98f9648876e87ae1ba8012b9272f28?cid=144b644df0bf44e4af679d1638fbe7f7",
   },
-  // {
-  //   id: 5,
-  //   title: "KU LO SA - A COLORS SHOW",
-  //   artiste: "Oxlade",
-  //   image: "",
-  //   albumName: "KU LO SA - A COLORS SHOW",
-  //   duration: 86,
-  //   playback: songFiles.folake,
-  // },
-  // {
-  //   id: 6,
-  //   title: "One Of A Kind",
-  //   artiste: "Jaido P",
-  //   image: "",
-  //   albumName: "One Of A Kind",
-  //   duration: 66,
-  //   playback: songFiles.folake,
-  // },
 ];
 
 export default songs;

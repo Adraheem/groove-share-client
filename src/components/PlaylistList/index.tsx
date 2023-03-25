@@ -22,7 +22,8 @@ function PlaylistList({className, showNewButton, title}: IProps) {
           )
         }
       </div>
-      <div className="grid grid-cols-7 gap-8">
+      <div
+        className="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 2xl:grid-cols-7 gap-x-3 md:gap-x-6 gap-y-8">
         {
           [...Array(6)].map((_, idx) => (
             <PlaylistCard key={idx}/>

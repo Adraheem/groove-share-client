@@ -20,8 +20,8 @@ function CurrentlyPlaying({id}: IProps) {
 
   return (
     <>
-      <div className="w-8 text-center group-hover:display-none">{id}</div>
-      <div className="w-8 text-center display-none group-hover:display-block text-primary">
+      <div className="w-6 md:w-8 text-center group-hover:display-none">{id}</div>
+      <div className="w-6 md:w-8 text-center display-none group-hover:display-block text-primary">
         <Icon
           icon="material-symbols:play-arrow-rounded"
           width={24}

@@ -26,7 +26,7 @@ function Controls(props: IProps) {
   const [state, setState] = useState({
     duration: 0,
     curTime: 0,
-  })
+  });
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -67,18 +67,18 @@ function Controls(props: IProps) {
     <>
       <div className="">
         <div className="flex items-center justify-center gap-2">
-          <Button type="link" onClick={handleShuffle} className={shuffle ? "button-active" : ""}>
+          <Button type="link" onClick={handleShuffle} className={`hidden md:block px-2 ${shuffle ? "button-active" : ""}`}>
             <Icon
               icon="ci:shuffle"
               width={24}
               height={24}
             />
           </Button>
-          <Button type="link">
+          <Button type="link" className="hidden md:block px-2">
             <Icon icon="ic:baseline-skip-previous" width={24} height={24}/>
           </Button>
           <div className="hover:scale-125 apply-transition">
-            <Button className="relative w-20" type="link" disabled={!loaded}
+            <Button className="relative w-auto md:w-20" type="link" disabled={!loaded}
                     onClick={handlePlayPause}>
               <Icon
                 icon={loading ? "eos-icons:three-dots-loading" : playing ? "material-symbols:pause-outline" : "material-symbols:play-arrow-rounded"}
@@ -92,10 +92,11 @@ function Controls(props: IProps) {
                 }}/>
             </Button>
           </div>
-          <Button type="link" onClick={handlePlayNext}>
+          <Button type="link" className="px-2" onClick={handlePlayNext}>
             <Icon icon="ic:baseline-skip-next" width={24} height={24}/>
           </Button>
-          <Button type="link" onClick={handleRepeat} className={repeat !== "OFF" ? "button-active" : ""}>
+          <Button type="link" onClick={handleRepeat}
+                  className={`hidden md:block px-2 ${repeat !== "OFF" ? "button-active" : ""}`}>
             <Icon
               icon={repeat === "ONE" ? "ph:repeat-once-bold" : "fluent:arrow-repeat-all-20-filled"}
               width={24}
@@ -103,7 +104,7 @@ function Controls(props: IProps) {
             />
           </Button>
         </div>
-        <div className="flex items-center gap-2 max-w-screen-md mx-auto">
+        <div className="items-center gap-2 max-w-screen-md mx-auto hidden md:flex">
           <p
             className="typo-caption w-10">{utils.formatDuration(state.curTime)}</p>
           <div className="flex-1">
@@ -131,6 +132,8 @@ function Controls(props: IProps) {
               volume={1}
               mute={undefined}
               ref={playerRef}
+              format={["mp3"]}
+              html5
           />}
     </>
   );

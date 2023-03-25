@@ -17,11 +17,11 @@ function MusicPlayer(props: IProps) {
 
   return (
     <div className="w-full fixed bottom-0 p-4 z-10 bg-white border-t border-slate-100">
-      <Container>
+      <Container className="pl-0 pr-0">
         <div className="flex items-center justify-center gap-5">
-          <div className="w-1/4">
+          <div className="md:w-1/4 flex-1">
             <div className="flex items-center gap-3">
-              <div className="w-12 aspect-square rounded overflow-hidden drop-shadow-lg">
+              <div className="w-12 aspect-square rounded overflow-hidden drop-shadow-sm">
                 <img src={currentSong?.image} alt="" className="image-cover"/>
               </div>
               <div>
@@ -34,11 +34,11 @@ function MusicPlayer(props: IProps) {
             </div>
           </div>
 
-          <div className="w-1/2">
+          <div className="md:w-1/2 w-auto">
             <Controls/>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 hidden md:block">
             <div className="flex items-center gap-2 justify-end">
               <Volume/>
               <Playlist/>

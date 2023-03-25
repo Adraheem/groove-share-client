@@ -8,7 +8,7 @@ const columns: ColumnsType<ISong> = [
     title: "#",
     dataIndex: "id",
     key: "id",
-    className: "w-8 text-center",
+    className: "w-6 md:w-8 text-center",
     render: (_, record) => (
       <CurrentlyPlaying id={record.id}/>
     )
@@ -32,13 +32,15 @@ const columns: ColumnsType<ISong> = [
   {
     title: "Album",
     dataIndex: "albumName",
-    key: "albumName"
+    key: "albumName",
+    responsive: ["md"]
   },
   {
     title: "Duration",
     dataIndex: "duration",
     key: "duration",
-    render: (duration: number) => utils.formatDuration(duration)
+    render: (duration: number) => utils.formatDuration(duration),
+    responsive: ["md"]
   }
 
 ];

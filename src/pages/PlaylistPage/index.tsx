@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from "../../components/Container";
-import images from "../../assets/images";
 import Dot from "../../components/Dot";
 import {Button} from "antd";
 import SongsTable from "../../components/SongsTable";
@@ -12,18 +11,20 @@ interface IProps {
 function PlaylistPage(props: IProps) {
   return (
     <div className="mb-20">
-      <div className="w-full h-48 relative z-[1]">
-        <img src={images.playlistCover} alt="" className="image-cover cover-banner"/>
+      <div className="w-full h-56 relative z-[1]">
+        <img src="https://i.scdn.co/image/ab67616d00001e02e5e0f9c3a32986fa9d261541" alt=""
+             className="image-cover cover-banner"/>
       </div>
       <Container className="-mt-28 relative z-[2]">
-        <div className="flex gap-5">
-          <div className="w-1/6">
+        <div className="flex flex-col xl:flex-row gap-5">
+          <div className="w-full xl:w-1/6">
             <div className="aspect-square rounded drop-shadow-2xl overflow-hidden">
-              <img src={images.playlistCover} alt="" className="image-cover"/>
+              <img src="https://i.scdn.co/image/ab67616d00001e02e5e0f9c3a32986fa9d261541" alt=""
+                   className="image-cover"/>
             </div>
           </div>
-          <div className="w-5/6 pt-20">
-            <h1>AfroB: Afrowave 3</h1>
+          <div className="w-full xl:w-5/6 pt-0 xl:pt-20">
+            <h1 className="xl:typo-h1 typo-h3">AfroB: Afrowave 3</h1>
             <div className="flex items-center gap-4">
               <p>Sir Dean</p>
               <Dot/>
