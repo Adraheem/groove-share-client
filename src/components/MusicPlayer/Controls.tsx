@@ -77,7 +77,7 @@ function Controls(props: IProps) {
           <Button type="link">
             <Icon icon="ic:baseline-skip-previous" width={24} height={24}/>
           </Button>
-          <div className="hover:scale-110">
+          <div className="hover:scale-125 apply-transition">
             <Button className="relative w-20" type="link" disabled={!loaded}
                     onClick={handlePlayPause}>
               <Icon

@@ -1,42 +1,41 @@
 import {ISong} from "../../types/song.types";
-import songFiles from "./songFiles";
 
 const songs: ISong[] = [
   {
     id: 1,
     title: "Folake",
     artiste: "Boy Spyce",
-    image: "https://assets.audiomack.com/boyspyce/f2aaf8747eb99b399fd14bf849ac4c12ba7ec851fcea65733b21032113bf57d9.png?width=1500&height=1500&max=true",
+    image: "https://i.scdn.co/image/ab67616d00001e02e5e0f9c3a32986fa9d261541",
     albumName: "More Love, Less Ego",
     duration: 766,
-    playback: songFiles.folake,
+    playback: "https://p.scdn.co/mp3-preview/8e9bbce80e5366a60ef3a9f7cf8d34df3317eefc?cid=144b644df0bf44e4af679d1638fbe7f7",
   },
   {
     id: 2,
     title: "GWAGWALADA",
     artiste: "BNXN fka Buju",
-    image: "https://assets.audiomack.com/bnxn/a8b0c8c34c45d2a987b81367a246b8ea9fc6761e2262a277e219e4e5cdba8e3f.jpeg?width=1500&height=1500&max=true",
+    image: "https://i.scdn.co/image/ab67616d00001e020a4ec262a9a596070c6f70e7",
     albumName: "GWAGWALADA",
     duration: 686,
-    playback: songFiles.gwagwalada,
+    playback: "https://p.scdn.co/mp3-preview/70f9858308bb711249226d0727ddbb43e7be9dd6?cid=144b644df0bf44e4af679d1638fbe7f7",
   },
   {
     id: 3,
     title: "Party No Dey Stop",
     artiste: "Adekunle Gold, Zinoleesky",
-    image: "https://assets.audiomack.com/adekunlegold/e01af9c735a6ca147ba9464381421a3c8d22959b26467f0d4175f3d7b524b470.jpeg?width=1500&height=1500&max=true",
-    albumName: "Overloading (OVERDOSE)",
+    image: "https://i.scdn.co/image/ab67616d00001e02a65faecabba47185c9d1da41",
+    albumName: "Party No Dey Stop",
     duration: 766,
-    playback: songFiles.zino,
+    playback: "https://p.scdn.co/mp3-preview/7ab0e3ab8d1794ee5805aa8180286b9269defac7?cid=144b644df0bf44e4af679d1638fbe7f7",
   },
   {
     id: 4,
     title: "Chance (Na Ham)",
     artiste: "Seyi Vibez",
-    image: "https://assets.audiomack.com/seyivibezmusic/03dc79aa7784166286e3a31211f0eb4deaff8f601280005d1ac681dc45d0752e.png?width=1500&height=1500&max=true",
+    image: "https://i.scdn.co/image/ab67616d00001e02af85f1204558bfde5418263a",
     albumName: "Chance (Na Ham)",
     duration: 768,
-    playback: songFiles.chance,
+    playback: "https://p.scdn.co/mp3-preview/74f0b5f06f98f9648876e87ae1ba8012b9272f28?cid=144b644df0bf44e4af679d1638fbe7f7",
   },
   // {
   //   id: 5,

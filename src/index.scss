@@ -160,7 +160,7 @@
     }
   }
 
-  button[type="button"].ant-btn-primary{
-    background-color: #DC1E11;
+  .apply-transition {
+    @apply transition-all;
   }
 }
