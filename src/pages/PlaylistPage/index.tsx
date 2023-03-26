@@ -4,6 +4,8 @@ import Dot from "../../components/Dot";
 import {Button} from "antd";
 import SongsTable from "../../components/SongsTable";
 import songs from "../../assets/data/songs";
+import {Icon} from "@iconify/react";
+import EditPlaylist from "./EditPlaylist";
 
 interface IProps {
 }
@@ -33,8 +35,17 @@ function PlaylistPage(props: IProps) {
               <p>67 songs</p>
             </div>
             <div className="flex items-center gap-2 mt-6">
-              <Button type="primary" size="large" className="px-6">Play</Button>
-              <Button type="primary" size="large" className="px-6">Shuffle</Button>
+              <EditPlaylist/>
+              <Button type="primary" size="large" className="px-6">
+                <span className="flex items-center gap-2">
+                  <Icon icon="material-symbols:play-arrow-rounded"/> Play
+                </span>
+              </Button>
+              <Button type="primary" size="large" className="px-6">
+                <span className="flex items-center gap-2">
+                  <Icon icon="ci:shuffle"/> Shuffle
+                </span>
+              </Button>
             </div>
 
             <div className="max-w-screen-md mt-6">

@@ -9,7 +9,7 @@ interface IProps {
 
 function PlaylistCard(props: IProps) {
   return (
-    <Link to="/playlist" className="group display-block">
+    <Link to="/playlist/wiweudg87ewgd" className="group display-block">
       <div
         className="w-full aspect-square rounded overflow-hidden drop-shadow-lg mb-2 group-hover:scale-95 apply-transition">
         <img src={images.playlistCover} alt="playlist" className="image-cover"/>

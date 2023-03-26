@@ -11,7 +11,7 @@ function Layout(props: IProps) {
   return (
     <div className="min-w-screen min-h-screen">
       <Header/>
-      <main>
+      <main className="min-h-[90vh]">
         <Outlet/>
       </main>
       <Footer/>

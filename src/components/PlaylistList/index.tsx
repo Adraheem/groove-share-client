@@ -16,7 +16,7 @@ function PlaylistList({className, showNewButton, title}: IProps) {
         <h5 className="leading-none">{title}</h5>
         {
           showNewButton && (
-            <Link to="">
+            <Link to="/playlist/add">
               <Button type="primary" size="small">Create new</Button>
             </Link>
           )
