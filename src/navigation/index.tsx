@@ -7,6 +7,8 @@ import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import HomePage from "../pages/HomePage";
 import CreatePlaylistPage from "../pages/CreatePlaylistPage";
+import UnAuthLayout from "../components/Layout/UnAuthLayout";
+import AuthLayout from "../components/Layout/AuthLayout";
 
 interface IProps {
 }
@@ -18,16 +20,21 @@ function RootNavigation(props: IProps) {
         <Route path="/" element={<Layout/>}>
           <Route path="" element={<HomePage/>}/>
 
-          <Route path="login" element={<LoginPage/>}/>
-          <Route path="signup" element={<SignupPage/>}/>
-          <Route path="search" element={<SearchPage/>}/>
+          <Route element={<UnAuthLayout/>}>
+            <Route path="login" element={<LoginPage/>}/>
+            <Route path="signup" element={<SignupPage/>}/>
+          </Route>
 
-          <Route path="playlist">
-            <Route path="add" element={<CreatePlaylistPage/>}/>
-            <Route path=":id">
-              <Route path="" element={<PlaylistPage/>}/>
+          <Route element={<AuthLayout/>}>
+            <Route path="search" element={<SearchPage/>}/>
+            <Route path="playlist">
+              <Route path="add" element={<CreatePlaylistPage/>}/>
+              <Route path=":id">
+                <Route path="" element={<PlaylistPage/>}/>
+              </Route>
             </Route>
           </Route>
+
         </Route>
       </Routes>
     </BrowserRouter>
