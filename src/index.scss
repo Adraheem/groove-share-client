@@ -17,6 +17,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Graphik";
+  src: url("./assets/fonts/GraphikSemibold.otf");
+  font-weight: 600;
+  font-style: normal;
+}
+
 @layer components {
   .typo-h1 {
     font-style: normal;

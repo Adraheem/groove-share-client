@@ -15,12 +15,13 @@ function RootNavigation(props: IProps) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="login" element={<LoginPage/>}/>
-        <Route path="signup" element={<SignupPage/>}/>
-
         <Route path="/" element={<Layout/>}>
           <Route path="" element={<HomePage/>}/>
+
+          <Route path="login" element={<LoginPage/>}/>
+          <Route path="signup" element={<SignupPage/>}/>
           <Route path="search" element={<SearchPage/>}/>
+
           <Route path="playlist">
             <Route path="add" element={<CreatePlaylistPage/>}/>
             <Route path=":id">
