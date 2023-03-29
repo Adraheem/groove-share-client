@@ -97,7 +97,7 @@ function SignupPage(props: IProps) {
                         <label>
                           <span className="flex">Email</span>
                           <Input
-                            type="text"
+                            type="email"
                             size="large"
                             placeholder="Email Address"
                             status={meta.touched && meta.error ? "error" : undefined}
