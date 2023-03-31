@@ -1,14 +1,32 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import images from "../../assets/images";
-import {Button} from "antd";
+import {Button, Dropdown, MenuProps} from "antd";
 import {useAppSelector} from "../../redux/hooks";
+import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 
 interface IProps {
 }
 
 function Header(props: IProps) {
   const {isAuthenticated} = useAppSelector(state => state.auth);
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Link to="/profile">View Profile</Link>
+      ),
+      icon: <UserOutlined/>
+    },
+    {
+      key: '2',
+      label: (
+        <Link to="/logout">Logout</Link>
+      ),
+      icon: <LogoutOutlined/>,
+    }
+  ];
 
   return (
     <>
@@ -21,13 +39,13 @@ function Header(props: IProps) {
             {
               isAuthenticated ? (
                 <li>
-                  <Link to="">
+                  <Dropdown placement="bottomRight" menu={{items}}>
                     <img
                       src={images.userProfilePic}
                       alt="User Profile"
-                      className="w-10 aspect-square object-cover object-center rounded"
+                      className="w-8 aspect-square object-cover object-center rounded cursor-pointer"
                     />
-                  </Link>
+                  </Dropdown>
                 </li>
               ) : (
                 <>

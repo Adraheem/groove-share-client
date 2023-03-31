@@ -1,14 +1,34 @@
 import React, {useState} from 'react';
 import {Icon} from "@iconify/react";
-import {Button, Modal} from "antd";
+import {Button, message, Modal} from "antd";
 import PlaylistForm from "../../components/PlaylistForm";
-import {Formik} from 'formik';
+import {Formik, FormikHelpers} from 'formik';
+import {IPlaylist} from "../../types/playlist.types";
+import playlistService from "../../services/playlist.service";
 
 interface IProps {
+  playlist: IPlaylist;
+  setPlaylist(playlist: IPlaylist): void;
 }
 
-function EditPlaylist(props: IProps) {
+function EditPlaylist({playlist, setPlaylist}: IProps) {
   const [isOpen, setOpen] = useState(false);
+
+  const onSubmit = (value: IPlaylist, helpers: FormikHelpers<IPlaylist>) => {
+    playlistService.updatePlaylist(value).then((savedPlaylist) => {
+      setPlaylist(savedPlaylist);
+      setOpen(false);
+    }).catch((err) => {
+      helpers.setSubmitting(false);
+      if (err?.response?.data?.data) {
+        helpers.setErrors(err.response?.data.data);
+      } else if (err?.response?.data?.message) {
+        message.open({type: "error", content: err.response?.data?.message});
+      } else {
+        message.open({type: "error", content: err.message});
+      }
+    });
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -21,8 +41,7 @@ function EditPlaylist(props: IProps) {
         </span>
       </Button>
 
-      <Formik initialValues={{}} onSubmit={() => {
-      }}>
+      <Formik initialValues={playlist} onSubmit={onSubmit} enableReinitialize>
         {({handleSubmit, isSubmitting}) => (
           <Modal
             open={isOpen}

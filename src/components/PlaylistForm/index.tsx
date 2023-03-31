@@ -1,7 +1,9 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Field, FieldProps, Form, useFormikContext} from "formik";
 import {Button, Input, Switch} from "antd";
 import images from "../../assets/images";
+import {IPlaylist} from "../../types/playlist.types";
+import InputErrorComponent from "../InputErrorComponent";
 
 interface IProps {
   type: "CREATE" | "EDIT";
@@ -10,7 +12,14 @@ interface IProps {
 
 function PlaylistForm({type, className}: IProps) {
   const [file, setFile] = useState<File | null>(null);
-  const {isSubmitting, handleSubmit} = useFormikContext();
+  const {isSubmitting, handleSubmit, setFieldValue, values} = useFormikContext<IPlaylist>();
+
+  useEffect(() => {
+    if (type === "CREATE") {
+      const slug = values.name.toLowerCase().replace(new RegExp(/\W+/, "g"), "-");
+      setFieldValue("slug", slug);
+    }
+  }, [setFieldValue, type, values.name]);
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     console.log(e?.target.files)
@@ -49,14 +58,38 @@ function PlaylistForm({type, className}: IProps) {
             </label>
           </div>
 
-          <Field name="title">
+          <Field name="name">
             {({field, meta}: FieldProps) => (
               <div>
                 <label>
                   <span className="flex">Playlist title</span>
-                  <Input type="text" size="large"
-                         placeholder="E.g. African vibez" {...field}/>
+                  <Input
+                    type="text"
+                    size="large"
+                    placeholder="E.g. African vibez"
+                    status={meta.touched && meta.error ? "error" : undefined}
+                    {...field}
+                  />
                 </label>
+                <InputErrorComponent name={field.name}/>
+              </div>
+            )}
+          </Field>
+
+          <Field name="slug">
+            {({field, meta}: FieldProps) => (
+              <div>
+                <label>
+                  <span className="flex">Slug</span>
+                  <Input
+                    type="text"
+                    size="large"
+                    placeholder="E.g. african-vibez"
+                    status={meta.touched && meta.error ? "error" : undefined}
+                    {...field}
+                  />
+                </label>
+                <InputErrorComponent name={field.name}/>
               </div>
             )}
           </Field>
@@ -66,18 +99,25 @@ function PlaylistForm({type, className}: IProps) {
               <div>
                 <label>
                   <span className="flex">Description</span>
-                  <Input.TextArea size="large" placeholder="Description"
-                                  autoSize {...field}/>
+                  <Input.TextArea
+                    size="large"
+                    placeholder="Description"
+                    autoSize
+                    status={meta.touched && meta.error ? "error" : undefined}
+                    {...field}
+                  />
                 </label>
+                <InputErrorComponent name={field.name}/>
               </div>
             )}
           </Field>
 
-          <Field name="isPrivate">
+          <Field name="isPublic">
             {({field, meta}: FieldProps) => (
-              <div className="flex justify-between items-center">
-                <p>Private</p>
-                <Switch/>
+              <div className="flex gap-5 items-center">
+                <p>Public</p>
+                <Switch checked={field.value} onChange={(e) => setFieldValue("isPublic", e)}/>
+                <InputErrorComponent name={field.name}/>
               </div>
             )}
           </Field>

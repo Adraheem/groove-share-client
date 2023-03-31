@@ -4,13 +4,13 @@ import RootNavigation from "./navigation";
 import {Provider} from "react-redux";
 import store, {persistor} from "./redux/store";
 import {PersistGate} from "redux-persist/integration/react";
+import authService from "./services/auth.service";
 
 function App() {
   return (
     <Provider store={store}>
       <PersistGate
-        onBeforeLift={() => {
-        }}
+        onBeforeLift={authService.reauthenticate}
         // loading={<AppLoading/>}
         persistor={persistor}>
         <ConfigProvider theme={{

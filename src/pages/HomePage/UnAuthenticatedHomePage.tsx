@@ -16,7 +16,11 @@ function UnAuthenticatedHomePage(props: IProps) {
       <div className={styles.circle2}/>
       <Container>
         <div className="mb-20 mt-10 text-center">
-          <img src={images.musicHero} alt="Music hero" className="w-4/5 max-w-xs mx-auto"/>
+          <img
+            src={images.musicHero}
+            alt="Music hero"
+            className={`w-4/5 max-w-xs mx-auto`}
+          />
           <Lottie animationData={images.waveform} className="h-16 mb-4 -mt-10"/>
           <h1 className="font-semibold">Create, Share, Play</h1>
           <h5 className="max-w-lg mx-auto">

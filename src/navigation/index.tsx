@@ -9,6 +9,7 @@ import HomePage from "../pages/HomePage";
 import CreatePlaylistPage from "../pages/CreatePlaylistPage";
 import UnAuthLayout from "../components/Layout/UnAuthLayout";
 import AuthLayout from "../components/Layout/AuthLayout";
+import LogoutPage from "../pages/LogoutPage";
 
 interface IProps {
 }
@@ -19,6 +20,7 @@ function RootNavigation(props: IProps) {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route path="" element={<HomePage/>}/>
+          <Route path="/logout" element={<LogoutPage/>}/>
 
           <Route element={<UnAuthLayout/>}>
             <Route path="login" element={<LoginPage/>}/>

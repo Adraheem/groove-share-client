@@ -1,18 +1,40 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import Container from "../../components/Container";
 import Dot from "../../components/Dot";
-import {Button, Segmented} from "antd";
+import {Button, message, Segmented} from "antd";
 import {Icon} from "@iconify/react";
 import EditPlaylist from "./EditPlaylist";
-import {IPlaylistTabOptions} from "../../types/playlist.types";
+import {IPlaylist, IPlaylistTabOptions} from "../../types/playlist.types";
 import Details from "./Details";
 import Contributors from "./Contributors";
+import {useParams} from "react-router-dom";
+import playlistService from "../../services/playlist.service";
+import isEmpty from "is-empty";
+import images from "../../assets/images";
 
 interface IProps {
 }
 
 function PlaylistPage(props: IProps) {
+  const params = useParams();
+
   const [activeTab, setActiveTab] = useState<IPlaylistTabOptions>("DETAILS");
+  const [playlist, setPlaylist] = useState<IPlaylist>();
+
+  useEffect(() => {
+    if (params.id) {
+      setPlaylist(undefined);
+      playlistService.getPlaylist(params.id).then((foundPlaylist) => {
+        setPlaylist(foundPlaylist);
+      }).catch((err) => {
+        if (err?.response?.data?.message) {
+          message.open({type: "error", content: err.response?.data?.message});
+        } else {
+          message.open({type: "error", content: err.message});
+        }
+      });
+    }
+  }, [params.id]);
 
   const tabOptions = useMemo(() => {
     return ([
@@ -30,29 +52,37 @@ function PlaylistPage(props: IProps) {
   const ActiveTabElement = useCallback(() => {
     switch (activeTab) {
       case "DETAILS":
-        return <Details/>;
+        return <Details playlist={playlist}/>;
 
       case "CONTRIBUTORS":
         return <Contributors/>;
     }
-  }, [activeTab]);
+  }, [activeTab, playlist]);
+
+  if (!playlist) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="mb-20">
       <div className="w-full h-56 relative z-[1]">
-        <img src="https://i.scdn.co/image/ab67616d00001e02e5e0f9c3a32986fa9d261541" alt=""
+        <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage} alt=""
              className="image-cover cover-banner"/>
       </div>
       <Container className="-mt-28 relative z-[2]">
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-1/4 xl:w-1/6">
             <div className="aspect-square max-w-xs mx-auto rounded drop-shadow-2xl overflow-hidden">
-              <img src="https://i.scdn.co/image/ab67616d00001e02e5e0f9c3a32986fa9d261541" alt=""
+              <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage} alt=""
                    className="image-cover"/>
             </div>
           </div>
           <div className="w-full md:w-3/4 xl:w-5/6 pt-0 md:pt-20">
-            <h1 className="xl:typo-h1 typo-h3">AfroB: Afrowave 3</h1>
+            <h1 className="xl:typo-h1 typo-h3">{playlist.name}</h1>
             <div className="flex items-center gap-4">
               <p>Sir Dean</p>
               <Dot/>
@@ -61,7 +91,7 @@ function PlaylistPage(props: IProps) {
               <p>67 songs</p>
             </div>
             <div className="flex flex-wrap items-center gap-2 mt-6">
-              <EditPlaylist/>
+              <EditPlaylist playlist={playlist} setPlaylist={setPlaylist}/>
               <Button type="primary" size="large" className="px-6">
                 <span className="flex items-center gap-2">
                   <Icon icon="material-symbols:play-arrow-rounded"/> Play
