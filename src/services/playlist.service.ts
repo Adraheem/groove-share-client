@@ -48,6 +48,15 @@ class PlaylistService {
     }
   }
 
+  public async getAllSongs(id: number): Promise<any[]> {
+    try {
+      const response = await apiInstance.get("/playlist-song/songs", {params: {playlistId: id}});
+      return Promise.resolve(response.data);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
 }
 
 const playlistService = new PlaylistService();

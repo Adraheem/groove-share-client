@@ -20,6 +20,7 @@ function PlaylistPage(props: IProps) {
 
   const [activeTab, setActiveTab] = useState<IPlaylistTabOptions>("DETAILS");
   const [playlist, setPlaylist] = useState<IPlaylist>();
+  const [songs, setSongs] = useState<any[]>();
 
   useEffect(() => {
     if (params.id) {
@@ -35,6 +36,20 @@ function PlaylistPage(props: IProps) {
       });
     }
   }, [params.id]);
+
+  useEffect(() => {
+    if (playlist?.id) {
+      playlistService.getAllSongs(playlist.id).then((res) => {
+        setSongs(res);
+      }).catch((err) => {
+        if (err?.response?.data?.message) {
+          message.open({type: "error", content: err.response?.data?.message});
+        } else {
+          message.open({type: "error", content: err.message});
+        }
+      })
+    }
+  }, [playlist?.id]);
 
   const tabOptions = useMemo(() => {
     return ([
@@ -52,7 +67,7 @@ function PlaylistPage(props: IProps) {
   const ActiveTabElement = useCallback(() => {
     switch (activeTab) {
       case "DETAILS":
-        return <Details playlist={playlist}/>;
+        return <Details playlist={playlist} songs={songs}/>;
 
       case "CONTRIBUTORS":
         return <Contributors/>;
@@ -77,7 +92,8 @@ function PlaylistPage(props: IProps) {
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-1/4 xl:w-1/6">
             <div className="aspect-square max-w-xs mx-auto rounded drop-shadow-2xl overflow-hidden">
-              <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage} alt=""
+              <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage}
+                   alt=""
                    className="image-cover"/>
             </div>
           </div>

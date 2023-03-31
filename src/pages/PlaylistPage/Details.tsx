@@ -1,14 +1,16 @@
 import React from 'react';
 import SongsTable from "../../components/SongsTable";
-import songs from "../../assets/data/songs";
+// import songs from "../../assets/data/songs";
 import {IPlaylist} from "../../types/playlist.types";
 import isEmpty from "is-empty";
+import { ISong } from '../../types/song.types';
 
 interface IProps {
   playlist?: IPlaylist;
+  songs?: ISong[];
 }
 
-function Details({playlist}: IProps) {
+function Details({playlist, songs}: IProps) {
   return (
     <div>
       {
