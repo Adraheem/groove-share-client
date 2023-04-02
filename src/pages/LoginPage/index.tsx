@@ -1,12 +1,13 @@
 import React from 'react';
 import Container from "../../components/Container";
-import {Button, Card, Input, message} from "antd";
+import {Button, Card, Divider, Input, message} from "antd";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import * as yup from "yup";
 import {Link} from "react-router-dom";
 import {ILoginRequest} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import InputErrorComponent from "../../components/InputErrorComponent";
+import {Icon} from "@iconify/react";
 
 interface IProps {
 }
@@ -37,7 +38,7 @@ function LoginPage(props: IProps) {
 
   return (
     <Container>
-      <Card className="max-w-sm mx-auto drop-shadow-lg p-4 mt-10">
+      <Card className="max-w-md mx-auto drop-shadow-lg p-4 mt-10">
         <div>
           <h3 className="text-center">Welcome back</h3>
           <p className="text-center">Login to have access to your playlists</p>
@@ -89,8 +90,8 @@ function LoginPage(props: IProps) {
                   <div>
                     <Button
                       type="primary"
-                      size="large"
-                      className="w-full"
+                      className="h-12"
+                      block
                       loading={isSubmitting}
                       disabled={!isValid}
                       onClick={() => handleSubmit()}>
@@ -106,6 +107,17 @@ function LoginPage(props: IProps) {
             Don't have an account?{" "}
             <Link to="/signup" className="text-primary hover:underline">Sign up</Link>
           </p>
+
+          <Divider plain>Or</Divider>
+
+          <div className="mt-8">
+            <Button className="h-12" block>
+              <span className="flex items-center justify-center gap-4">
+                <Icon icon="logos:google-icon" width={24} height={24} inline/>
+                <span>Login with Google</span>
+              </span>
+            </Button>
+          </div>
         </div>
       </Card>
     </Container>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Input, message} from "antd";
+import {Button, Card, Divider, Input, message} from "antd";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import * as yup from "yup";
 import {Link} from "react-router-dom";
@@ -7,6 +7,7 @@ import Container from "../../components/Container";
 import {ISignupRequest} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import InputErrorComponent from "../../components/InputErrorComponent";
+import {Icon} from '@iconify/react';
 
 interface IProps {
 }
@@ -41,13 +42,13 @@ function SignupPage(props: IProps) {
 
   return (
     <Container>
-      <Card className="max-w-sm mx-auto drop-shadow-lg p-4 mt-10">
+      <Card className="max-w-md mx-auto drop-shadow-lg p-4 mt-10">
         <div>
           <h3 className="text-center">Get Started</h3>
           <p className="text-center">Create a free account to create and share playlists to your
             loved ones</p>
 
-          <div className="mt-10 max-w-sm mx-auto">
+          <div className="mt-8 max-w-sm mx-auto">
             <Formik
               initialValues={initialValue}
               onSubmit={onSubmit}
@@ -130,8 +131,8 @@ function SignupPage(props: IProps) {
                   <div>
                     <Button
                       type="primary"
-                      size="large"
-                      className="w-full"
+                      className="h-12"
+                      block
                       loading={isSubmitting}
                       disabled={!isValid}
                       onClick={() => handleSubmit()}>
@@ -147,6 +148,17 @@ function SignupPage(props: IProps) {
             Already have an account?{" "}
             <Link to="/login" className="text-primary hover:underline">Login</Link>
           </p>
+
+          <Divider plain>Or</Divider>
+
+          <div className="mt-8">
+            <Button className="h-12" block>
+              <span className="flex items-center justify-center gap-4">
+                <Icon icon="logos:google-icon" width={24} height={24} inline/>
+                <span>Sign up with Google</span>
+              </span>
+            </Button>
+          </div>
         </div>
       </Card>
     </Container>
