@@ -9,8 +9,9 @@ import Details from "./Details";
 import Contributors from "./Contributors";
 import {useParams} from "react-router-dom";
 import playlistService from "../../services/playlist.service";
-import isEmpty from "is-empty";
 import images from "../../assets/images";
+import {IPage} from "../../types/IPage.types";
+import {ISong} from "../../types/song.types";
 
 interface IProps {
 }
@@ -20,7 +21,7 @@ function PlaylistPage(props: IProps) {
 
   const [activeTab, setActiveTab] = useState<IPlaylistTabOptions>("DETAILS");
   const [playlist, setPlaylist] = useState<IPlaylist>();
-  const [songs, setSongs] = useState<any[]>();
+  const [songs, setSongs] = useState<IPage<ISong>>();
 
   useEffect(() => {
     if (params.id) {
@@ -67,12 +68,12 @@ function PlaylistPage(props: IProps) {
   const ActiveTabElement = useCallback(() => {
     switch (activeTab) {
       case "DETAILS":
-        return <Details playlist={playlist} songs={songs}/>;
+        return <Details playlist={playlist} songs={songs?.content}/>;
 
       case "CONTRIBUTORS":
         return <Contributors/>;
     }
-  }, [activeTab, playlist]);
+  }, [activeTab, playlist, songs]);
 
   if (!playlist) {
     return (
@@ -85,14 +86,14 @@ function PlaylistPage(props: IProps) {
   return (
     <div className="mb-20">
       <div className="w-full h-56 relative z-[1]">
-        <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage} alt=""
+        <img src={playlist.coverImage || images.playlistDummy} alt=""
              className="image-cover cover-banner"/>
       </div>
       <Container className="-mt-28 relative z-[2]">
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-1/4 xl:w-1/6">
             <div className="aspect-square max-w-xs mx-auto rounded drop-shadow-2xl overflow-hidden">
-              <img src={isEmpty(playlist.coverImage) ? images.playlistDummy : playlist.coverImage}
+              <img src={playlist.coverImage || images.playlistDummy}
                    alt=""
                    className="image-cover"/>
             </div>

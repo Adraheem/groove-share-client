@@ -10,8 +10,8 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate
-        onBeforeLift={authService.reauthenticate}
-        // loading={<AppLoading/>}
+        onBeforeLift={async() => await authService.reauthenticate()}
+        loading={<></>}
         persistor={persistor}>
         <ConfigProvider theme={{
           token: {

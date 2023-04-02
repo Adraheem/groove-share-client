@@ -1,5 +1,9 @@
 import {IPlaylist} from "../types/playlist.types";
 import apiInstance from "./api.service";
+import store from "../redux/store";
+import {playlistsActions} from "../redux/reducers/playlistSlice";
+import {IPage} from "../types/IPage.types";
+import {ISong} from "../types/song.types";
 
 class PlaylistService {
 
@@ -30,6 +34,17 @@ class PlaylistService {
     }
   }
 
+  public async getAllContribPlaylists(): Promise<IPlaylist[]> {
+    try {
+      const response = await apiInstance.get("/contributor/getPlaylists");
+      const playlists: IPlaylist[] = response.data;
+      store.dispatch(playlistsActions.setPlaylists(playlists));
+      return Promise.resolve(playlists);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
   public async deletePlaylist(slug: string): Promise<IPlaylist> {
     try {
       const response = await apiInstance.delete("/playlist/delete", {params: {slug}});
@@ -48,9 +63,15 @@ class PlaylistService {
     }
   }
 
-  public async getAllSongs(id: number): Promise<any[]> {
+  public async getAllSongs(id: number, page = 0, size = 100): Promise<IPage<ISong>> {
     try {
-      const response = await apiInstance.get("/playlist-song/songs", {params: {playlistId: id}});
+      const response = await apiInstance.get("/playlist-song/songs", {
+        params: {
+          playlistId: id,
+          page,
+          size
+        }
+      });
       return Promise.resolve(response.data);
     } catch (e) {
       return Promise.reject(e);
