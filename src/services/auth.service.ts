@@ -31,6 +31,17 @@ class AuthService {
     await this.setTokenAndGetUserDetails(token);
   }
 
+  public async updateUserDetails(data: IUser){
+    try {
+      const response = await apiInstance.patch("/user/details", data);
+      const userDetails: IUser = response.data;
+      store.dispatch(authActions.setUserDetails(userDetails));
+      return Promise.resolve();
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
   private async setTokenAndGetUserDetails(token: string) {
     try {
       setAuthToken(token);

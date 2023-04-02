@@ -17,6 +17,10 @@ function SignupPage(props: IProps) {
     lastName: yup.string().required("Required").nullable(),
     email: yup.string().email("Invalid email format").required("Required").nullable(),
     password: yup.string().required("Required").nullable(),
+    username: yup.string()
+      .matches(/^[a-zA-Z0-9_]{6,20}$/, `Username can only contain letters, numbers of 6 - 20 characters`)
+      .required("Required")
+      .nullable(),
   });
 
   const initialValue: ISignupRequest = {
@@ -24,6 +28,7 @@ function SignupPage(props: IProps) {
     lastName: "",
     email: "",
     password: "",
+    username: "",
   }
 
   const onSubmit = (value: ISignupRequest, helpers: FormikHelpers<ISignupRequest>) => {
@@ -82,6 +87,24 @@ function SignupPage(props: IProps) {
                             type="text"
                             size="large"
                             placeholder="Last Name"
+                            status={meta.touched && meta.error ? "error" : undefined}
+                            {...field}
+                          />
+                        </label>
+                        <InputErrorComponent name={field.name}/>
+                      </div>
+                    )}
+                  </Field>
+
+                  <Field name="username">
+                    {({field, meta}: FieldProps) => (
+                      <div>
+                        <label>
+                          <span className="flex">Username</span>
+                          <Input
+                            type="email"
+                            size="large"
+                            placeholder="Username"
                             status={meta.touched && meta.error ? "error" : undefined}
                             {...field}
                           />

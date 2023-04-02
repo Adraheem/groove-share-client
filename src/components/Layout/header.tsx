@@ -43,7 +43,7 @@ function Header(props: IProps) {
                     <img
                       src={images.userProfilePic}
                       alt="User Profile"
-                      className="w-8 aspect-square object-cover object-center rounded cursor-pointer"
+                      className="w-10 aspect-square object-cover object-center rounded-full cursor-pointer"
                     />
                   </Dropdown>
                 </li>

@@ -3,6 +3,7 @@ export interface ISignupRequest {
   lastName: string;
   email: string;
   password: string;
+  username: string;
 }
 
 export interface ILoginRequest {
@@ -15,7 +16,7 @@ export interface ITokenResponse {
 }
 
 export interface IUser {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   username?: string;

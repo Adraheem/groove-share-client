@@ -10,6 +10,9 @@ import CreatePlaylistPage from "../pages/CreatePlaylistPage";
 import UnAuthLayout from "../components/Layout/UnAuthLayout";
 import AuthLayout from "../components/Layout/AuthLayout";
 import LogoutPage from "../pages/LogoutPage";
+import ProfilePage from "../pages/ProfilePage";
+import EditProfilePage from "../pages/ProfilePage/EditProfile";
+import BillingInfoPage from "../pages/ProfilePage/BillingInfo";
 
 interface IProps {
 }
@@ -29,12 +32,19 @@ function RootNavigation(props: IProps) {
 
           <Route element={<AuthLayout/>}>
             <Route path="search" element={<SearchPage/>}/>
+
+            <Route path="profile" element={<ProfilePage/>}>
+              <Route path="" element={<EditProfilePage/>}/>
+              <Route path="billing" element={<BillingInfoPage/>}/>
+            </Route>
+
             <Route path="playlist">
               <Route path="add" element={<CreatePlaylistPage/>}/>
               <Route path=":id">
                 <Route path="" element={<PlaylistPage/>}/>
               </Route>
             </Route>
+
           </Route>
 
         </Route>
