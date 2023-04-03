@@ -1,7 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { GoogleAuthProvider, getAuth, signInWithRedirect, getRedirectResult } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,8 +10,10 @@ const firebaseConfig = {
   messagingSenderId: "113992713737",
   appId: "1:113992713737:web:ba6fe3bdddce87b56e1ad8"
 };
-
-// Initialize Firebase
+const provider = new GoogleAuthProvider();
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
 
-export default app;
+export {
+  app, provider, auth, signInWithRedirect, getRedirectResult
+}

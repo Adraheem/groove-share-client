@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Button, Card, Divider, Input, message} from "antd";
 import {Field, FieldProps, Form, Formik, FormikHelpers} from "formik";
 import * as yup from "yup";
@@ -8,6 +8,7 @@ import {ISignupRequest} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import InputErrorComponent from "../../components/InputErrorComponent";
 import {Icon} from '@iconify/react';
+import {provider, auth, signInWithRedirect, getRedirectResult} from "../../config/index";
 
 interface IProps {
 }
@@ -39,6 +40,22 @@ function SignupPage(props: IProps) {
       }
     });
   }
+
+  const onGoogleSignIn = (event: React.MouseEvent) => {
+    event.preventDefault();
+    signInWithRedirect(auth, provider);
+  }
+
+  useEffect(() => {
+    getRedirectResult(auth)
+  .then((result) => {
+    //Get result here...
+    console.log(result)
+  }).catch((error) => {
+    // Handle Errors here.
+    console.log(error)
+  });
+  }, [])
 
   return (
     <Container>
@@ -152,7 +169,7 @@ function SignupPage(props: IProps) {
           <Divider plain>Or</Divider>
 
           <div className="mt-8">
-            <Button className="h-12" block>
+            <Button onClick={onGoogleSignIn} className="h-12" block>
               <span className="flex items-center justify-center gap-4">
                 <Icon icon="logos:google-icon" width={24} height={24} inline/>
                 <span>Sign up with Google</span>
