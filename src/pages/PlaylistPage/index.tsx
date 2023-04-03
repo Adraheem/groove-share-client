@@ -71,7 +71,7 @@ function PlaylistPage(props: IProps) {
         return <Details playlist={playlist} songs={songs?.content}/>;
 
       case "CONTRIBUTORS":
-        return <Contributors/>;
+        return <Contributors playlistId={playlist?.id}/>;
     }
   }, [activeTab, playlist, songs]);
 

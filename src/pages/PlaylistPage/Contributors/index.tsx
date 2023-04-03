@@ -1,13 +1,37 @@
-import React from 'react';
-import {Table} from "antd";
-import contributors from "../../../assets/data/contributors";
+import React, {useEffect, useState} from 'react';
+import {message, Table} from "antd";
 import columns from "./columns";
 import AddContributor from "./AddContributor";
+import {IContributor} from "../../../types/playlist.types";
+import playlistService from "../../../services/playlist.service";
 
 interface IProps {
+  playlistId?: number
 }
 
-function Contributors(props: IProps) {
+function Contributors({playlistId}: IProps) {
+  const [loading, setLoading] = useState(true);
+  const [contributors, setContributors] = useState<IContributor[]>([]);
+
+  const addContributor = (e: IContributor) => {
+    setContributors(prev => [...prev, e]);
+  }
+
+  useEffect(() => {
+    if (playlistId) {
+      playlistService.getAllContributors(playlistId).then((res) => {
+        setLoading(false);
+        setContributors(res);
+      }).catch((err) => {
+        if (err?.response?.data?.message) {
+          message.open({type: "error", content: err.response?.data?.message});
+        } else {
+          message.open({type: "error", content: err.message});
+        }
+      })
+    }
+  }, [playlistId]);
+
   return (
     <div>
       <h5>Contributors</h5>
@@ -21,10 +45,12 @@ function Contributors(props: IProps) {
           rowKey="id"
           rowClassName="group cursor-pointer"
           pagination={false}
+          loading={loading}
         />
       </div>
-
-      <AddContributor/>
+      {
+        !!playlistId && <AddContributor playlistId={playlistId} addContributor={addContributor}/>
+      }
     </div>
   );
 }

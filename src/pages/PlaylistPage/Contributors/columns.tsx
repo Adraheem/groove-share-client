@@ -11,7 +11,7 @@ const columns: ColumnsType<IContributor> = [
     render: (_, record) => (
       <>
         {record.user.firstName} {record.user.lastName} {" "}
-        {record.isAuthor && <Tag color="red" className="ml-2">Author</Tag>}
+        {record.author && <Tag color="red" className="ml-2">Author</Tag>}
       </>
     )
   },

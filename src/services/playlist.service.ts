@@ -1,4 +1,4 @@
-import {IPlaylist} from "../types/playlist.types";
+import {IAddContributorToPlaylistRequest, IContributor, IPlaylist} from "../types/playlist.types";
 import apiInstance from "./api.service";
 import store from "../redux/store";
 import {playlistsActions} from "../redux/reducers/playlistSlice";
@@ -73,6 +73,30 @@ class PlaylistService {
         }
       });
       return Promise.resolve(response.data);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
+  public async addContributorToPlaylist(data: IAddContributorToPlaylistRequest): Promise<IContributor> {
+    try {
+      const response = await apiInstance.post(`/contributor/add/${data.playlistId}/${data.username}`);
+      const contributor: IContributor = response.data;
+      return Promise.resolve(contributor);
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
+  public async getAllContributors(id: number): Promise<IContributor[]> {
+    try {
+      const response = await apiInstance.get("/contributor/getAll", {
+        params: {
+          playlistId: id,
+        }
+      });
+      const contributors: IContributor[] = response.data;
+      return Promise.resolve(contributors);
     } catch (e) {
       return Promise.reject(e);
     }

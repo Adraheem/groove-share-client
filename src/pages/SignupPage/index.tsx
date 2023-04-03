@@ -7,6 +7,7 @@ import Container from "../../components/Container";
 import {ISignupRequest} from "../../types/auth.types";
 import authService from "../../services/auth.service";
 import InputErrorComponent from "../../components/InputErrorComponent";
+import regexPattern from "../../assets/data/regexPattern";
 
 interface IProps {
 }
@@ -18,7 +19,7 @@ function SignupPage(props: IProps) {
     email: yup.string().email("Invalid email format").required("Required").nullable(),
     password: yup.string().required("Required").nullable(),
     username: yup.string()
-      .matches(/^[a-zA-Z0-9_]{6,20}$/, `Username can only contain letters, numbers of 6 - 20 characters`)
+      .matches(regexPattern.username.regex, regexPattern.username.message)
       .required("Required")
       .nullable(),
   });

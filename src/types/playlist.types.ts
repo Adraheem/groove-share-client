@@ -15,6 +15,11 @@ export type IContributor = {
   id: number;
   user: IUser;
   playlist?: IPlaylist;
-  isAuthor: boolean;
+  author: boolean;
+}
+
+export interface IAddContributorToPlaylistRequest {
+  username: string;
+  playlistId: number;
 }
 

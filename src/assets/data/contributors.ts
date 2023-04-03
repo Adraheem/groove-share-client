@@ -9,7 +9,7 @@ const contributors: IContributor[] = [
       lastName: "Doe",
       emailAddress: "john@gmail.com",
     },
-    isAuthor: false
+    author: false
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const contributors: IContributor[] = [
       lastName: "Smith",
       emailAddress: "john@gmail.com",
     },
-    isAuthor: true
+    author: true
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const contributors: IContributor[] = [
       lastName: "Foo",
       emailAddress: "john@gmail.com",
     },
-    isAuthor: false
+    author: false
   },
 ];
 

@@ -6,6 +6,7 @@ import authService from "../../../services/auth.service";
 import {Button, Input, message} from "antd";
 import InputErrorComponent from "../../../components/InputErrorComponent";
 import {useAppSelector} from "../../../redux/hooks";
+import regexPattern from "../../../assets/data/regexPattern";
 
 interface IProps {
 }
@@ -18,7 +19,7 @@ function EditProfilePage(props: IProps) {
     lastName: yup.string().required("Required").nullable(),
     emailAddress: yup.string().email("Invalid email format").required("Required").nullable(),
     username: yup.string()
-      .matches(/^[a-zA-Z0-9_]{6,20}$/, `Username can only contain letters, numbers of 6 - 20 characters`)
+      .matches(regexPattern.username.regex, regexPattern.username.message)
       .required("Required")
       .nullable(),
   });
